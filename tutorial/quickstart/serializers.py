@@ -25,7 +25,7 @@ class PostSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        exclude = ['created_on']
+        exclude = ['id', 'created_on']
 
 
 class CategorySerializer(serializers.ModelSerializer):
