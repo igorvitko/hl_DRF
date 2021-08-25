@@ -3,6 +3,9 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from rest_framework_extensions.cache.mixins import CacheResponseMixin
+
 from tutorial.quickstart.serializers import *
 from tutorial.quickstart.models import Post, Comment, Category
 
@@ -25,16 +28,18 @@ class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
-class PostView(viewsets.ModelViewSet):
+class PostView(CacheResponseMixin, viewsets.ModelViewSet):
     """
     API endpoint that allows post to be viewed, added, edited and deleted
     """
     permission_classes = (IsAuthenticated,)
-    queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+    def get_queryset(self):
+        return Post.objects.filter(is_published=True)
 
-class CommentView(viewsets.ModelViewSet):
+
+class CommentView(CacheResponseMixin, viewsets.ModelViewSet):
     """
     API endpoint that allows comment to be viewed, added, edited and deleted
     """
@@ -43,7 +48,7 @@ class CommentView(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
 
 
-class CategoryView(viewsets.ModelViewSet):
+class CategoryView(CacheResponseMixin, viewsets.ModelViewSet):
     """
        API endpoint that allows category to be viewed, added, edited and deleted
     """
