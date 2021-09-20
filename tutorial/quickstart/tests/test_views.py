@@ -1,5 +1,4 @@
 import json
-from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient, APITestCase
@@ -17,7 +16,7 @@ class PostTest(APITestCase):
     """ test module for create post, get postlist, create comment"""
 
     def setUp(self):
-        self.test_user = User.objects.create_user(username='ihor', password='pass1234')
+        self.test_user = MyUser.objects.create_user(username='ihor', password='pass1234')
         self.test_user_token = Token.objects.create(user=self.test_user)
 
         self.test_category = Category.objects.create(
