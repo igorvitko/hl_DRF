@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'tutorial.quickstart.middleware.CustomerSessionMiddleware',
-    'tutorial.quickstart.middleware.CustomerBlockSiteMiddleware',
+    # 'tutorial.quickstart.middleware.CustomerBlockSiteMiddleware',
 ]
 
 ROOT_URLCONF = 'tutorial.urls'
@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
@@ -152,3 +152,9 @@ REST_FRAMEWORK_EXTENSIONS = {
     'DEFAULT_CACHE_RESPONSE_TIMEOUT': 30,
 }
 
+AUTH_USER_MODEL = 'quickstart.MyUser'
+
+# # Celery Configuration Options
+CELERY_TIMEZONE = "Europe/Kiev"
+CELERY_BROKER_URL = 'amqp://localhost:5672'
+CELERY_RESULT_BACKEND = 'rpc'

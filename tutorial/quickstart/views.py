@@ -7,14 +7,15 @@ from rest_framework.views import APIView
 from rest_framework_extensions.cache.mixins import CacheResponseMixin
 
 from tutorial.quickstart.serializers import *
-from tutorial.quickstart.models import Post, Comment, Category
+from tutorial.quickstart.models import Post, Comment, Category, MyUser
+from tutorial.quickstart.tasks import *
 
 
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = MyUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
@@ -63,4 +64,3 @@ class Logout(APIView):
     def post(self, request, format=None):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
-
