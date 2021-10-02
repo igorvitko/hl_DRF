@@ -25,7 +25,8 @@ class MyUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'first_name', 'last_name', 'is_staff', 'is_active', 'is_notified')}
+            'fields': ('username', 'password1', 'password2', 'first_name',
+                       'last_name', 'is_staff', 'is_active', 'is_notified')}
          ),
     )
     list_display = ('id', 'username', 'first_name', 'last_name', 'is_staff', 'is_notified')
