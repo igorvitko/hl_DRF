@@ -48,7 +48,7 @@ class CommentView(CacheResponseMixin, viewsets.ModelViewSet):
     """
     API endpoint that allows comment to be viewed, added, edited and deleted
     """
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
